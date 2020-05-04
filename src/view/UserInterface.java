@@ -18,11 +18,11 @@ public class UserInterface {
 		System.out.println("------------------------o-----------------------");
 		System.out.println("Choose one option to continue");
 		System.out.println("");
-		System.out.println("1) Company with the highest capital");
-		System.out.println("2) Company with the lowest capital");
-		System.out.println("3) Investor with the highest number of shares");
-		System.out.println("4) Investor with the lowest number of shares");
-		System.out.println("5) Exit");
+		System.out.println("1) Display company with the highest capital");
+		System.out.println("2) Display company with the lowest capital");
+		System.out.println("3) Display investor with the highest number of shares");
+		System.out.println("4) Display investor with the lowest number of shares");
+		System.out.println("5) Exit simulation");
 		
 	}
 	

@@ -52,15 +52,17 @@ public class TradeSimulator {
         companiesWithSalesList = new ArrayList<>();
         sharesSoldCounter = 0;
 
-        userInterface.printMessage("Simulating trade day...");
-        userInterface.delaySeg(3);
 
+        userInterface.printMessage("Starting Simulation...");
+        userInterface.delaySeg(2);
 
         //Generating companies
         for(int k = 1; k <= 100; k++) {
             Company newCompany = new Company(k);
             companyList.add(newCompany);
         }
+        userInterface.printMessage("100 Companies joined to the simulation...");
+        userInterface.delaySeg(2);
 
         //Generating investors
         for(int k = 1; k <= 100; k++) {
@@ -68,13 +70,19 @@ public class TradeSimulator {
             investorList.add(newInvestor);
         }
 
-        System.out.println();
+        userInterface.printMessage("100 Inversors joined to the simulation...");
+        userInterface.delaySeg(2);
 
+        userInterface.printMessage("Starting trading day...");
+        userInterface.delaySeg(3);
 
 
         simulateTradeDay(companyList, investorList);
 
-        userInterface.printMessage("Trading day finished");
+        userInterface.printMessage("Trading day finished..");
+        userInterface.delaySeg(2);
+        userInterface.printMessage("Results ready to query..");
+        userInterface.delaySeg(2);
         int userOption=0;
         do{
             userInterface.listOptions();
