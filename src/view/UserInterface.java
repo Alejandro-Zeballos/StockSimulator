@@ -3,6 +3,7 @@ package view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 
 public class UserInterface {
 	
@@ -59,16 +60,25 @@ public class UserInterface {
 	
 	public void printMessage(String message) {
 		System.out.println(message);
-		System.out.println("");
 	}
 	
 	
 
 	public void close() {
 		try {
+			printMessage("Thanks for using this simulator..");
 			br.close();
+			System.exit(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void delaySeg(int i) {
+		try{
+			TimeUnit.SECONDS.sleep(i);
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}
