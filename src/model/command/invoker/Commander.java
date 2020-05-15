@@ -1,4 +1,4 @@
-package model.invoker;
+package model.command.invoker;
 
 import model.command.Command;
 

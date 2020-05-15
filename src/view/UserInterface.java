@@ -30,8 +30,8 @@ public class UserInterface {
 		
 		int initialOption = 1;
 		int finalOption = 5;
-		String option = "";
-		int numericOption = 0;
+		String option;
+		int numericOption;
 		
 		//this line will try to convert the input to integer and if it fails means that the input is wrong 
 		try {
@@ -67,6 +67,8 @@ public class UserInterface {
 	public void close() {
 		try {
 			printMessage("Thanks for using this simulator..");
+			delaySeg(1);
+			printMessage("Simulator closed");
 			br.close();
 			System.exit(0);
 		} catch (IOException e) {

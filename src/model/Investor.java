@@ -1,18 +1,30 @@
 package model;
 
-import java.util.Random;
+import model.observer.Observer;
+import model.observer.subject.Subject;
+import utils.TypeUpdate;
+import utils.Utils;
 
-public class Investor {
+import java.util.List;
+
+
+public class Investor implements Observer {
 	private int id;
 	private int shares;
 	private int budget;
+	private List<Company> companiesAvailable;
+	private Subject companiesState;
 	
-	public Investor(int id) {
+	public Investor(int id, List<Company> companies) {
 		this.id = id;
-		this.budget = generateBudget();
+		this.budget = Utils.generateRandomNumber(1000, 10000);
 		this.shares = 0;
+		this.companiesAvailable = companies;
 	}
 
+	public List<Company> getCompaniesAvailable(){
+		return  this.companiesAvailable;
+	}
 	
 	public int getShares() {
 		return this.shares;
@@ -39,11 +51,34 @@ public class Investor {
 	public String toString() {
 		return "\tInvestor ID: "+id+"\n " +
 				"\tBudget: "+budget+"\n " +
-				"\tShares acquired: "+shares;
+				"\tShares acquired: "+shares+"\n";
 	}
-	
-	private int generateBudget() {
-		Random randomGenerator = new Random();
-		return randomGenerator.nextInt(	10000 - 1000 + 1) + 1000;
+
+
+	//this update method will update the local list of companies
+	@Override
+	public void update(Subject sub) {
+		TypeUpdate updateType =  sub.getUpdate().getTypeUpdate();
+		Company updatedCompany = (Company) sub.getUpdate().getObj();
+
+		switch (updateType){
+			case SHARE_PRICE_CHANGED:
+				//if the update type is price change, will update company price
+				for(Company company: companiesAvailable){
+					if(company.getId() == updatedCompany.getId()){
+						company.setSharePrice(updatedCompany.getSharePrice());
+					}
+				}
+				break;
+			case NO_SHARES:
+				//if the case is no_shares, it will remove this company from the pool of companies
+				companiesAvailable.removeIf(company -> company.getId() == updatedCompany.getId());
+			break;
+		}
+	}
+
+	@Override
+	public void setSubject(Subject sub) {
+		this.companiesState = sub;
 	}
 }
